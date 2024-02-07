@@ -17,3 +17,5 @@ router.post('/teste', (req, res) => {
 
 
 });
+
+export { router };
