@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { testServer } from "../jest.setup";
 
 describe('Cidades - DeleteById,', () => {
+  
   it('Apaga registro', async () => {
     const res1 = await testServer
      .post('/cidades')
@@ -21,7 +22,7 @@ describe('Cidades - DeleteById,', () => {
     .delete('/cidades/999999')
     .send();
 
-    expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+    expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND);
     expect(res1.body).toHaveProperty('error.default');
   });
 });
