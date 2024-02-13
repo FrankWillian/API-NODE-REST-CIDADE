@@ -15,9 +15,10 @@ describe('Cidades - UpdateById,', () => {
       .get(`/cidades/${res1.body}`)
       .send();
 
-    expect(resAtualizada.statusCode).toEqual(StatusCodes.NO_CONTENT);
+    expect(resAtualizada.statusCode).toEqual(StatusCodes.OK);
 
   });
+
 
   it('Tenta atualizar registro que não existe', async () => {
 
