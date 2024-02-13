@@ -13,5 +13,6 @@ router.get('/cidades', CidadesController.getAllValidation, CidadesController.get
 router.get('/cidades/:id', CidadesController.getByIdValidation, CidadesController.getById);
 router.put('/cidades/:id', CidadesController.updateByIdValidation, CidadesController.updateById);
 router.post('/cidades', CidadesController.createValidation, CidadesController.create);
+router.delete('/cidades/:id', CidadesController.deleteValidation, CidadesController.deleteById);
 
 export { router };
