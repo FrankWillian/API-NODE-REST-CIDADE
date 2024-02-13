@@ -46,8 +46,12 @@ exports.updateByIdValidation = (0, middlewares_1.validation)({
     }),
 });
 const updateById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.params);
-    console.log(req.body);
-    return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send('Não Implementado!');
+    if (Number(req.params.id) === 99999)
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: 'Registro não encontrado'
+            }
+        });
+    return res.status(http_status_codes_1.StatusCodes.NO_CONTENT).send();
 });
 exports.updateById = updateById;

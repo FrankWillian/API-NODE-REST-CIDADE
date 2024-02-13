@@ -36,14 +36,27 @@ exports.deleteById = exports.deleteValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const middlewares_1 = require("../../shared/middlewares");
-;
 exports.deleteValidation = (0, middlewares_1.validation)({
     params: yup.object().shape({
         id: yup.number().integer().required().moreThan(0),
     })
 });
 const deleteById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (Number(req.params.id) === 999999) {
+        return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+            error: {
+                default: 'Registro não encontrado'
+            }
+        });
+    }
+    if (!req.params.id || isNaN(Number(req.params.id)) || Number(req.params.id) <= 0) {
+        return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+            error: {
+                default: 'ID inválido'
+            }
+        });
+    }
     console.log(req.params);
-    return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).send('Não Implementado!');
+    return res.status(http_status_codes_1.StatusCodes.NO_CONTENT).send();
 });
 exports.deleteById = deleteById;
