@@ -32,6 +32,6 @@
     "test": "jest"
   },
   "engines": {
-    "node": "16.X"
+    "node": "20.X"
   }
 }
