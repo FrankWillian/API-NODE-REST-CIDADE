@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.production = exports.test = exports.development = void 0;
+const console_1 = require("console");
 const path_1 = __importDefault(require("path"));
 exports.development = {
     client: 'sqlite3',
@@ -24,5 +25,6 @@ exports.development = {
         }
     }
 };
+console_1.clear;
 exports.test = Object.assign(Object.assign({}, exports.development), { connection: ':memory' });
 exports.production = Object.assign({}, exports.development);

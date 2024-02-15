@@ -1,3 +1,4 @@
+import { clear } from "console";
 import { Knex } from "knex";
 import path from "path";
 
@@ -20,7 +21,7 @@ export const development: Knex.Config = {
     }
   }
 };
-
+clear
 export const test: Knex.Config = {
   ...development,
   connection: ':memory',

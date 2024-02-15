@@ -10,25 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.down = exports.up = void 0;
-const ETableNames_1 = require("../seeds/ETableNames");
 function up(knex) {
     return __awaiter(this, void 0, void 0, function* () {
-        return knex
-            .schema
-            .createTable(ETableNames_1.ETableNames.cidade, table => {
-            table.bigIncrements('id').primary().index();
-            table.string('nome', 150).checkLength('<=', 150).index().notNullable();
-            table.comment('Tabela usada para armazenar cidades do sistema');
-        })
-            .then(() => {
-            console.log(`# Create table ${ETableNames_1.ETableNames.cidade}`);
-        });
     });
 }
 exports.up = up;
 function down(knex) {
     return __awaiter(this, void 0, void 0, function* () {
-        return knex.schema.dropTable(ETableNames_1.ETableNames.cidade);
     });
 }
 exports.down = down;
