@@ -1,14 +1,13 @@
 import { ETableNames } from "../../seeds/ETableNames";
-import { ICidade } from "../../models";
+import { IPessoa } from "../../models/Pessoas";
 import { Knex } from "../../knex";
 
-export const UpdateById = async (id: number, cidade: Omit<ICidade, 'id'>): Promise<void | Error> => {
+export const UpdateById = async (id: number, cidade: Omit<IPessoa, 'id'>): Promise<void | Error> => {
   try {
-    const result = await Knex(ETableNames.cidade)
-      .update(cidade)
+    const result = await Knex(ETableNames.pessoa)
       .where('id', '=', id)
 
-    if (result > 0) return ;
+    //if (result > 0) return ;
 
     return new Error('Erro a atualizar o registo');
   } catch (error) {
