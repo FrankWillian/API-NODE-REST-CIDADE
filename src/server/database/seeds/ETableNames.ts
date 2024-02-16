@@ -2,7 +2,8 @@ import { cidadesBrasil } from './0000_insert_cidades'
 import { Knex } from 'knex';
 
 export enum ETableNames {
-  cidade = 'cidade'
+  cidade = 'cidade',
+  pessoa = 'pessoa',
 }
 
 export const seed = async (knex: Knex): Promise<void> => {
