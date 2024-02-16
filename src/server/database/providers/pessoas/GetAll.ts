@@ -1,10 +1,10 @@
 import { ETableNames } from "../../seeds/ETableNames";
-import { ICidade } from "../../models";
+import { IPessoa } from "../../models";
 import { Knex } from "../../knex";
 
-export const GetAll = async (page: number, limit: number, filter: string, id: number): Promise<ICidade[] | Error> => {
+export const GetAll = async (page: number, limit: number, filter: string, id: number): Promise<IPessoa[] | Error> => {
   try {
-    let query = Knex(ETableNames.cidade)
+    let query = Knex(ETableNames.pessoa)
       .select('*')
       .offset((page - 1) * limit)
       .limit(limit);
