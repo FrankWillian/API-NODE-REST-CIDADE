@@ -7,11 +7,19 @@ server.listen(process.env.PORT || 3333, () => {
 });
 
 if (process.env.IS_LOCALHOST !== 'true') {
-  Knex.migrate.latest()
+  console.log('Rodando migrations');
+
+  Knex.migrate
+  .latest()
   .then(() => {
-    start();
+    Knex.seed.run()
+    .then(() => start())
+    .catch(console.log);
   })
-.catch(console.log);
+  .catch(console.log);
 } else {
   start();
 }
+
+
+
