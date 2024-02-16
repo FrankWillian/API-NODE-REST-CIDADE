@@ -1,5 +1,5 @@
 import { ETableNames } from "../../seeds/ETableNames";
-import { IPessoa } from "../../models";
+import { IPessoa } from "../../models/Pessoas";
 import { Knex } from "../../knex";
 
 export const GetById = async (id: number): Promise<IPessoa | Error> => {
