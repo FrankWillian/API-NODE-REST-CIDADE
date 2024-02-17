@@ -9,7 +9,8 @@ export async function up(knex: Knex) {
     table.string('nomeCompleto').index().notNullable();
     table.string('email').unique().notNullable();
     table.bigInteger('cidadeId').index().notNullable().references('id').inTable(ETableNames.cidade).onUpdate('CASCADE').onDelete;
-    table.comment('Tabela usada para armazenar cidades do sistema');
+
+    table.comment('Tabela usada para armazenar pessoas do sistema');
   })
   .then(() => {
     console.log(`# Create table ${ETableNames.pessoa}`);

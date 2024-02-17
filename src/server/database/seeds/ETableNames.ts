@@ -4,6 +4,7 @@ import { Knex } from 'knex';
 export enum ETableNames {
   cidade = 'cidade',
   pessoa = 'pessoa',
+  usuario = 'usuario',
 }
 
 export const seed = async (knex: Knex): Promise<void> => {
