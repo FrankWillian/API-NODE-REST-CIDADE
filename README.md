@@ -1,4 +1,16 @@
-﻿# API-NODE-REST-CIDADE
+# Sistema de Gerenciamento de Pessoas
 
+Este é um projeto de exemplo para um **Sistema de Gerenciamento de Pessoas**, desenvolvido utilizando Node.js, Express.js, e banco de dados SQLite.
 
-Este README.md fornece informações sobre o projeto, instruções de instalação, uso, testes, contribuição, informações sobre o autor e a licença do projeto. Você pode adaptar esse modelo conforme necessário para atender às especificidades do seu projeto.
+## Funcionalidades
+
+- **CRUD de Pessoas**: Crie, leia, atualize e delete informações de pessoas no sistema.
+- **Endpoints RESTful**: Rotas configuradas seguindo as melhores práticas de API RESTful.
+
+## Instalação
+
+1. **Clone este repositório:**
+
+```bash
+git clone https://github.com/seu-usuario/sistema-gerenciamento-pessoas.git
+
