@@ -1,25 +1,38 @@
 import { StatusCodes } from "http-status-codes";
 import { testServer } from "../jest.setup";
 
-describe('Cidades - DeleteById,', () => {
+describe('Pessoas - DeleteById,', () => {
+
+  let cidadeId: number | undefined = undefined;
+  beforeAll(async () => {
+    const resCidade = await testServer
+      .post('/cidades')
+      .send( { nome: 'Teste' });
+
+    cidadeId = resCidade.body;
+  })
   
   it('Apaga registro', async () => {
     const res1 = await testServer
-     .post('/cidades')
-     .send({ nome: 'Caxias do sul'});
+     .post('/pessoas')
+     .send({
+      cidadeId,
+      email: 'frankwillian@gmail.com',
+      nomeCompleto: 'Frank Willian',
+    });
 
      expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
      const resApagada = await testServer
-      .delete(`/cidades/${res1.body}`)
-      .send();
+      .delete(`/pessoas/${res1.body}`)
+      .send({});
 
     expect(resApagada.statusCode).toEqual(StatusCodes.NO_CONTENT);
 
   });
   it('Tenta apaga registro que não existe', async () => {
     const res1 = await testServer
-    .delete('/cidades/999999')
+    .delete('/pessoas/999999')
     .send();
 
     expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND);
