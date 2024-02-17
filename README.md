@@ -1,16 +1,16 @@
-# Sistema de Gerenciamento de Pessoas
+<h1 align="center">👥 People Management System</h1>
 
-Este é um projeto de exemplo para um **Sistema de Gerenciamento de Pessoas**, desenvolvido utilizando Node.js, Express.js, e banco de dados SQLite.
+<p align="center">This is an example project for a <strong>People Management System</strong>, developed using Node.js, Express.js, and SQLite database.</p>
 
-## Funcionalidades
+## Features
 
-- **CRUD de Pessoas**: Crie, leia, atualize e delete informações de pessoas no sistema.
-- **Endpoints RESTful**: Rotas configuradas seguindo as melhores práticas de API RESTful.
+- **CRUD Operations for People**: Create, read, update, and delete people's information in the system.
+- **RESTful Endpoints**: Routes configured following the best practices of RESTful API.
 
-## Instalação
+## Installation
 
-1. **Clone este repositório:**
+1. **Clone this repository:**
 
 ```bash
-git clone https://github.com/seu-usuario/sistema-gerenciamento-pessoas.git
+git clone https://github.com/your-username/people-management-system.git
 
