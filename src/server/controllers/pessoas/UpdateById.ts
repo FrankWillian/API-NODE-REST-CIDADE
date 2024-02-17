@@ -1,16 +1,16 @@
 import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from 'yup';
-import { CidadesProvider } from "../../database/providers/cidades";
+
+import { PessoasProvider } from "../../database/providers/pessoas";
 import { validation } from "../../shared/middlewares";
+import { IPessoa } from "../../database/models/Pessoas";
 
 interface IParamProps {
   id?: number;
 };
 
-interface IBodyProps {
-  nome: string;
-}
+interface IBodyProps extends Omit<IPessoa, 'id'>{}
 
 export const updateByIdValidation = validation({
     params: yup.object().shape({
@@ -30,7 +30,7 @@ export const updateById = async (req: Request<IParamProps, {}, IBodyProps>, res:
    }
   });
 
-  const result = await CidadesProvider.UpdateById(Number(req.params.id), req.body);
+  const result = await PessoasProvider.UpdateById(Number(req.params.id), req.body);
   if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {
