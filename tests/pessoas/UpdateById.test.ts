@@ -1,30 +1,44 @@
 import { StatusCodes } from "http-status-codes";
 import { testServer } from "../jest.setup";
 
-describe('Cidades - UpdateById,', () => {
+describe('Pessoas - UpdateById,', () => {
+
+  let cidadeId: number | undefined = undefined;
+
+  beforeAll(async () => {
+
+  })
   
   it('Atualiza registro', async () => {
 
     const res1 = await testServer
-     .post('/cidades')
-     .send({ nome: 'Caxias do sul'});
+     .post('/pessoas')
+     .send({ 
+      cidadeId,
+      nomeCompleto: 'Frank Willian',
+      email: 'frankwillian@gmail.com.br'
+    });
 
      expect(res1.statusCode).toEqual(StatusCodes.CREATED);
 
      const resAtualizada = await testServer
-      .get(`/cidades/${res1.body}`)
-      .send();
+      .put(`/pessoas/${res1.body}`)
+      .send({ 
+        cidadeId,
+        nomeCompleto: 'Frank Willian',
+        email: 'frankwillian@gmail.com.br'
+      });
 
-    expect(resAtualizada.statusCode).toEqual(StatusCodes.OK);
-
+    expect(resAtualizada.statusCode).toEqual(StatusCodes.NO_CONTENT);
   });
 
 
   it('Tenta atualizar registro que não existe', async () => {
 
     const res1 = await testServer
-    .delete('/cidades/999999')
-    .send();
+    .put('/pessoa/999999')
+    .send(
+    );
 
     expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND);
     expect(res1.body).toHaveProperty('error.default');
