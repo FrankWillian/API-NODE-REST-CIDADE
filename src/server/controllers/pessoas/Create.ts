@@ -1,7 +1,7 @@
 import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from 'yup';
-import { CidadesProvider } from "../../database/providers/cidades";
+import { PessoasProvider } from "../../database/providers/pessoas";
 import { validation } from "../../shared/middlewares";
 import { IPessoa } from "../../database/models/Pessoas";
 
@@ -13,12 +13,12 @@ export const createValidation = validation({
 })});
 
 export const create = async (req: Request<{}, {}, IPessoa>, res: Response) => {
-  const result = await CidadesProvider.create(req.);
+  const result = await PessoasProvider.create(req.body);
 
   if (result === null || result === undefined) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {
-        default: 'Erro ao criar cidade'
+        default: 'Erro ao criar Pessoa'
       }
     });
   }
