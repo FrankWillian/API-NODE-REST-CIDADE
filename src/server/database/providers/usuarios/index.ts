@@ -1,7 +1,7 @@
 import * as create from './Create';
-import * as getById from './GetById';
+import * as getByEmail from './GetByEmail';
 
 export const UsuarioProvider = {
   ...create, 
-  ...getById,
+  ...getByEmail,
 }
