@@ -23,11 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CidadesProvider = void 0;
-const create = __importStar(require("./Create"));
-const deleteById = __importStar(require("./DeleteById"));
-const getById = __importStar(require("./GetById"));
-const updateById = __importStar(require("./UpdateById"));
-const getAll = __importStar(require("./GetAll"));
-const count = __importStar(require("./Count"));
-exports.CidadesProvider = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, create), deleteById), getById), updateById), getAll), count);
+exports.UsuariosController = void 0;
+const signIn = __importStar(require("./SignIn"));
+const signUp = __importStar(require("./SignUp"));
+exports.UsuariosController = Object.assign(Object.assign({}, signIn), signUp);

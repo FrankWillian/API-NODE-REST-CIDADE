@@ -9,16 +9,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seed = exports.ETableNames = void 0;
-const _0000_insert_cidades_1 = require("./0000_insert_cidades");
-var ETableNames;
-(function (ETableNames) {
-    ETableNames["cidade"] = "cidade";
-    ETableNames["pessoa"] = "pessoa";
-    ETableNames["usuario"] = "usuario";
-})(ETableNames || (exports.ETableNames = ETableNames = {}));
+exports.seed = exports.cidadesBrasil = void 0;
+const ETableNames_1 = require("./ETableNames");
+exports.cidadesBrasil = [
+    "Acrelândia",
+    "Assis Brasil",
+    "Brasiléia",
+    "Bujari",
+    "Capixaba",
+    "Cruzeiro do Sul",
+    "Epitaciolândia",
+    "Feijó",
+    "Jordão",
+    "Mâncio Lima",
+    "Manoel Urbano",
+    "Marechal Thaumaturgo",
+    "Plácido de Castro",
+    "Porto Acre",
+    "Porto Walter",
+    "Rio Branco",
+    "Rodrigues Alves",
+    "Santa Rosa do Purus",
+    "Sena Madureira",
+    "Senador Guiomard",
+    "Tarauacá",
+    "Xapuri"
+];
 const seed = (knex) => __awaiter(void 0, void 0, void 0, function* () {
-    yield knex(ETableNames.cidade).del();
-    yield knex(ETableNames.cidade).insert(_0000_insert_cidades_1.cidadesBrasil.map(nome => ({ nome })));
+    const [{ count }] = yield knex(ETableNames_1.ETableNames.cidade).count('* as count');
+    if (!Number.isInteger(count) || Number(count) > 0)
+        return;
+    yield knex(ETableNames_1.ETableNames.cidade).insert(exports.cidadesBrasil.map(nome => ({ nome })));
 });
 exports.seed = seed;

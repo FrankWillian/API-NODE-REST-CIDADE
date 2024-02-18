@@ -9,16 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seed = exports.ETableNames = void 0;
-const _0000_insert_cidades_1 = require("./0000_insert_cidades");
-var ETableNames;
-(function (ETableNames) {
-    ETableNames["cidade"] = "cidade";
-    ETableNames["pessoa"] = "pessoa";
-    ETableNames["usuario"] = "usuario";
-})(ETableNames || (exports.ETableNames = ETableNames = {}));
-const seed = (knex) => __awaiter(void 0, void 0, void 0, function* () {
-    yield knex(ETableNames.cidade).del();
-    yield knex(ETableNames.cidade).insert(_0000_insert_cidades_1.cidadesBrasil.map(nome => ({ nome })));
+exports.count = void 0;
+const ETableNames_1 = require("../../seeds/ETableNames");
+const knex_1 = require("../../knex");
+const count = (filter = '') => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const [{ count }] = yield (0, knex_1.Knex)(ETableNames_1.ETableNames.cidade)
+            .where('nome', 'like', `%${filter}%`)
+            .count('* as count');
+        if (Number.isInteger(Number(count)))
+            Number(count);
+        return new Error('Erro ao consultar a quantidade total de registros');
+    }
+    catch (error) {
+        console.log(error);
+        return new Error('Erro ao consultar a quantidade total de registros');
+    }
 });
-exports.seed = seed;
+exports.count = count;

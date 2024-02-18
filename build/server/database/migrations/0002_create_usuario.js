@@ -15,13 +15,14 @@ function up(knex) {
     return __awaiter(this, void 0, void 0, function* () {
         return knex
             .schema
-            .createTable(ETableNames_1.ETableNames.cidade, table => {
+            .createTable(ETableNames_1.ETableNames.usuario, table => {
             table.bigIncrements('id').primary().index();
-            table.string('nome', 150).checkLength('<=', 150).index().notNullable();
-            table.comment('Tabela usada para armazenar cidades do sistema');
+            table.string('nome').notNullable().checkLength('>=', 3);
+            table.string('email').unique().notNullable().checkLength('>=', 6);
+            table.comment('Tabela usada para armazenar usuarios do sistema');
         })
             .then(() => {
-            console.log(`# Create table ${ETableNames_1.ETableNames.cidade}`);
+            console.log(`# Create table ${ETableNames_1.ETableNames.usuario}`);
         });
     });
 }
@@ -30,9 +31,9 @@ function down(knex) {
     return __awaiter(this, void 0, void 0, function* () {
         return knex
             .schema
-            .dropTable(ETableNames_1.ETableNames.cidade)
+            .dropTable(ETableNames_1.ETableNames.usuario)
             .then(() => {
-            console.log(`# Dropped table ${ETableNames_1.ETableNames.cidade}`);
+            console.log(`# Dropped table ${ETableNames_1.ETableNames.usuario}`);
         });
     });
 }

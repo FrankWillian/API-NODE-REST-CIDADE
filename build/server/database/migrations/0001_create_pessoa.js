@@ -15,13 +15,15 @@ function up(knex) {
     return __awaiter(this, void 0, void 0, function* () {
         return knex
             .schema
-            .createTable(ETableNames_1.ETableNames.cidade, table => {
+            .createTable(ETableNames_1.ETableNames.pessoa, table => {
             table.bigIncrements('id').primary().index();
-            table.string('nome', 150).checkLength('<=', 150).index().notNullable();
-            table.comment('Tabela usada para armazenar cidades do sistema');
+            table.string('nomeCompleto').index().notNullable();
+            table.string('email').unique().notNullable();
+            table.bigInteger('cidadeId').index().notNullable().references('id').inTable(ETableNames_1.ETableNames.cidade).onUpdate('CASCADE').onDelete;
+            table.comment('Tabela usada para armazenar pessoas do sistema');
         })
             .then(() => {
-            console.log(`# Create table ${ETableNames_1.ETableNames.cidade}`);
+            console.log(`# Create table ${ETableNames_1.ETableNames.pessoa}`);
         });
     });
 }
@@ -30,9 +32,9 @@ function down(knex) {
     return __awaiter(this, void 0, void 0, function* () {
         return knex
             .schema
-            .dropTable(ETableNames_1.ETableNames.cidade)
+            .dropTable(ETableNames_1.ETableNames.pessoa)
             .then(() => {
-            console.log(`# Dropped table ${ETableNames_1.ETableNames.cidade}`);
+            console.log(`# Dropped table ${ETableNames_1.ETableNames.pessoa}`);
         });
     });
 }

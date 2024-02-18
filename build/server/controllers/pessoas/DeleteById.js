@@ -32,36 +32,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAll = exports.getAllValidation = void 0;
+exports.deleteById = exports.deleteValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
-const cidades_1 = require("../../database/providers/cidades");
 const middlewares_1 = require("../../shared/middlewares");
-// Validação de entrada
-exports.getAllValidation = (0, middlewares_1.validation)({
-    query: yup.object().shape({
-        page: yup.number().notRequired().moreThan(0),
-        limit: yup.number().notRequired().moreThan(0),
-        filter: yup.string().notRequired(),
-    }),
+const pessoas_1 = require("../../database/providers/pessoas");
+exports.deleteValidation = (0, middlewares_1.validation)({
+    params: yup.object().shape({
+        id: yup.number().integer().required().moreThan(0),
+    })
 });
-const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = yield cidades_1.CidadesProvider.GetAll(req.query.page || 1, req.query.limit || 7, req.query.filter || '', Number(req.query.id));
-        const count = yield cidades_1.CidadesProvider.count(req.query.filter);
-        if (result instanceof Error) {
-            return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({ errors: { default: result.message } });
-        }
-        else if (count instanceof Error) {
-            return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ errors: { default: count.message } });
-        }
-        res.setHeader('access-control-expose-headers', 'x-total-count');
-        res.setHeader('x-total-count', count);
-        return res.status(http_status_codes_1.StatusCodes.OK).json(result);
+const deleteById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!req.params.id) {
+        return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+            error: {
+                default: 'O parâmetro de ID precisa ser informado!'
+            }
+        });
     }
-    catch (error) {
-        console.error('Erro ao processar a solicitação:', error);
-        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({ errors: { default: 'Erro interno do servidor' } });
+    const result = yield pessoas_1.PessoasProvider.deleteById(req.params.id);
+    if (result instanceof Error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message
+            }
+        });
     }
+    return res.status(http_status_codes_1.StatusCodes.NO_CONTENT).send();
 });
-exports.getAll = getAll;
+exports.deleteById = deleteById;

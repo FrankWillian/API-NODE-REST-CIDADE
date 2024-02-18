@@ -9,16 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seed = exports.ETableNames = void 0;
-const _0000_insert_cidades_1 = require("./0000_insert_cidades");
-var ETableNames;
-(function (ETableNames) {
-    ETableNames["cidade"] = "cidade";
-    ETableNames["pessoa"] = "pessoa";
-    ETableNames["usuario"] = "usuario";
-})(ETableNames || (exports.ETableNames = ETableNames = {}));
-const seed = (knex) => __awaiter(void 0, void 0, void 0, function* () {
-    yield knex(ETableNames.cidade).del();
-    yield knex(ETableNames.cidade).insert(_0000_insert_cidades_1.cidadesBrasil.map(nome => ({ nome })));
+exports.create = void 0;
+const knex_1 = require("../../knex");
+const ETableNames_1 = require("../../seeds/ETableNames");
+const create = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const [result] = yield (0, knex_1.Knex)(ETableNames_1.ETableNames.usuario).insert(usuario).returning('id');
+        if (typeof result === 'object') {
+            return result.id;
+        }
+        else if (typeof result === 'object') {
+            return result;
+        }
+        throw new Error('Erro ao cadastrar o registro');
+    }
+    catch (error) {
+        console.error(error);
+        throw new Error('Erro ao cadastrar o registro');
+    }
 });
-exports.seed = seed;
+exports.create = create;

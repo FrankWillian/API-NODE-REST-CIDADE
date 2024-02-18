@@ -9,16 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seed = exports.ETableNames = void 0;
-const _0000_insert_cidades_1 = require("./0000_insert_cidades");
-var ETableNames;
-(function (ETableNames) {
-    ETableNames["cidade"] = "cidade";
-    ETableNames["pessoa"] = "pessoa";
-    ETableNames["usuario"] = "usuario";
-})(ETableNames || (exports.ETableNames = ETableNames = {}));
-const seed = (knex) => __awaiter(void 0, void 0, void 0, function* () {
-    yield knex(ETableNames.cidade).del();
-    yield knex(ETableNames.cidade).insert(_0000_insert_cidades_1.cidadesBrasil.map(nome => ({ nome })));
+exports.UpdateById = void 0;
+const ETableNames_1 = require("../../seeds/ETableNames");
+const knex_1 = require("../../knex");
+const UpdateById = (id, cidade) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield (0, knex_1.Knex)(ETableNames_1.ETableNames.cidade)
+            .update(cidade)
+            .where('id', '=', id);
+        if (result > 0)
+            return;
+        return new Error('Erro a atualizar o registo');
+    }
+    catch (error) {
+        console.log(error);
+        return new Error('Erro a atualizar o registo');
+    }
 });
-exports.seed = seed;
+exports.UpdateById = UpdateById;

@@ -35,7 +35,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAll = exports.getAllValidation = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
-const cidades_1 = require("../../database/providers/cidades");
+const pessoas_1 = require("../../database/providers/pessoas");
 const middlewares_1 = require("../../shared/middlewares");
 // Validação de entrada
 exports.getAllValidation = (0, middlewares_1.validation)({
@@ -47,8 +47,8 @@ exports.getAllValidation = (0, middlewares_1.validation)({
 });
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield cidades_1.CidadesProvider.GetAll(req.query.page || 1, req.query.limit || 7, req.query.filter || '', Number(req.query.id));
-        const count = yield cidades_1.CidadesProvider.count(req.query.filter);
+        const result = yield pessoas_1.PessoasProvider.GetAll(req.query.page || 1, req.query.limit || 7, req.query.filter || '');
+        const count = yield pessoas_1.PessoasProvider.count(req.query.filter);
         if (result instanceof Error) {
             return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({ errors: { default: result.message } });
         }
