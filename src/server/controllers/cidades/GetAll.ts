@@ -10,7 +10,7 @@ interface IQueryProps {
   filter?: string;
 }
 
-// Validação de entrada
+
 export const getAllValidation = validation({
   query: yup.object().shape({
     page: yup.number().notRequired().moreThan(0),
