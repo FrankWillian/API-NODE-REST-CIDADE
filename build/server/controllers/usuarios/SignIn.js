@@ -37,6 +37,8 @@ const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const usuarios_1 = require("../../database/providers/usuarios");
 const middlewares_1 = require("../../shared/middlewares");
+const services_1 = require("../../shared/services");
+const services_2 = require("../../shared/services");
 exports.signInValidation = (0, middlewares_1.validation)({
     body: yup.object().shape({
         email: yup.string().required().min(3).max(15),
@@ -45,15 +47,16 @@ exports.signInValidation = (0, middlewares_1.validation)({
 });
 const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, senha } = req.body;
-    const result = yield usuarios_1.UsuarioProvider.GetByEmail(email);
-    if (result instanceof Error) {
+    const usuario = yield usuarios_1.UsuarioProvider.GetByEmail(email);
+    if (usuario instanceof Error) {
         return res.status(http_status_codes_1.StatusCodes.UNAUTHORIZED).json({
             errors: {
                 default: 'Email ou senha são inválidos'
             }
         });
     }
-    if (senha !== result.senha) {
+    const passwordMatch = yield services_1.PasswordCrypto.verifyPassword(senha, usuario.senha);
+    if (passwordMatch) {
         return res.status(http_status_codes_1.StatusCodes.UNAUTHORIZED).json({
             errors: {
                 default: 'Email ou senha são inválidos'
@@ -61,6 +64,7 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     else {
+        const acessToken = services_2.JWTService.sign({ uid: usuario.id });
         return res.status(http_status_codes_1.StatusCodes.OK).json({ acessToken: 'teste.teste.teste' });
     }
 });

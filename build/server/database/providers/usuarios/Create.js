@@ -10,11 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
+const services_1 = require("../../../shared/services");
 const knex_1 = require("../../knex");
 const ETableNames_1 = require("../../seeds/ETableNames");
 const create = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const [result] = yield (0, knex_1.Knex)(ETableNames_1.ETableNames.usuario).insert(usuario).returning('id');
+        const hashedPassword = yield services_1.PasswordCrypto.hashPassword(usuario.senha);
+        const [result] = yield (0, knex_1.Knex)(ETableNames_1.ETableNames.usuario).insert(Object.assign(Object.assign({}, usuario), { senha: hashedPassword })).returning('id');
         if (typeof result === 'object') {
             return result.id;
         }

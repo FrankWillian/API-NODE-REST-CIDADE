@@ -37,7 +37,6 @@ const http_status_codes_1 = require("http-status-codes");
 const yup = __importStar(require("yup"));
 const cidades_1 = require("../../database/providers/cidades");
 const middlewares_1 = require("../../shared/middlewares");
-// Validação de entrada
 exports.getAllValidation = (0, middlewares_1.validation)({
     query: yup.object().shape({
         page: yup.number().notRequired().moreThan(0),
